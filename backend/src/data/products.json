@@ -1,0 +1,82 @@
+[
+  { 
+    "id": 1, 
+    "title": "Умная колонка Яндекс Станция 2", 
+    "price": 549, 
+    "category": "Электроника", 
+    "inStock": true, 
+    "image": "https://avatars.mds.yandex.net/get-mpic/5235254/img_id5042615609405622143.jpeg/orig" 
+  },
+  { 
+    "id": 2, 
+    "title": "Кроссовки Nike Air Max 90", 
+    "price": 420, 
+    "category": "Обувь", 
+    "inStock": true, 
+    "image": "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=600&auto=format&fit=crop&q=60" 
+  },
+  { 
+    "id": 3, 
+    "title": "Apple MacBook Air 13 M1", 
+    "price": 2899, 
+    "category": "Электроника", 
+    "inStock": true, 
+    "image": "https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=600&auto=format&fit=crop&q=60" 
+  },
+  { 
+    "id": 4, 
+    "title": "Рюкзак городской XD Design", 
+    "price": 185, 
+    "category": "Аксессуары", 
+    "inStock": false, 
+    "image": "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=600&auto=format&fit=crop&q=60" 
+  },
+  { 
+    "id": 5, 
+    "title": "Наушники Sony WH-1000XM4", 
+    "price": 950, 
+    "category": "Электроника", 
+    "inStock": true, 
+    "image": "https://images.unsplash.com/photo-1618366712010-f4ae9c647dcb?w=600&auto=format&fit=crop&q=60" 
+  },
+  { 
+    "id": 6, 
+    "title": "Кофемашина DeLonghi Magnifica", 
+    "price": 1250, 
+    "category": "Бытовая техника", 
+    "inStock": true, 
+    "image": "https://images.unsplash.com/photo-1520013817300-1f4c1cb245ef?w=600&auto=format&fit=crop&q=60" 
+  },
+  { 
+    "id": 7, 
+    "title": "Механические часы Tissot", 
+    "price": 1450, 
+    "category": "Аксессуары", 
+    "inStock": true, 
+    "image": "https://images.unsplash.com/photo-1524805444758-089113d48a6d?w=600&auto=format&fit=crop&q=60" 
+  },
+  { 
+    "id": 8, 
+    "title": "Игровая приставка PlayStation 5", 
+    "price": 2100, 
+    "category": "Электроника", 
+    "inStock": true, 
+    "image": "https://images.unsplash.com/photo-1606813907291-d86efa9b94db?w=600&auto=format&fit=crop&q=60" 
+  },
+  { 
+    "id": 9, 
+    "title": "Солнцезащитные очки Ray-Ban", 
+    "price": 450, 
+    "category": "Аксессуары", 
+    "inStock": true, 
+    "image": "https://images.unsplash.com/photo-1511499767150-a48a237f0083?w=600&auto=format&fit=crop&q=60" 
+  },
+  { 
+    "id": 10, 
+    "title": "Беспроводная мышь Logitech MX", 
+    "price": 320, 
+    "category": "Электроника", 
+    "inStock": false, 
+    "image": "https://images.unsplash.com/photo-1527864550417-7fd91fc51a46?w=600&auto=format&fit=crop&q=60" 
+  }
+]

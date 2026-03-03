@@ -1,0 +1,109 @@
+.auth-wrapper {
+  background: white;
+  width: 100%;
+  max-width: 480px; /* Увеличили карточку */
+  padding: 50px; /* Добавили больше воздуха */
+  border-radius: 24px; /* Более круглые углы */
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
+}
+
+.auth-header {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.auth-header h2 {
+  font-size: 24px;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.auth-header p {
+  color: #888;
+  font-size: 14px;
+}
+
+.auth-tabs {
+  display: flex;
+  margin-bottom: 25px;
+  background: #f0f0f4;
+  border-radius: 12px;
+  padding: 4px;
+}
+
+.auth-tab {
+  flex: 1;
+  padding: 10px;
+  text-align: center;
+  border: none;
+  background: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 14px;
+  color: #666;
+  transition: all 0.3s ease;
+}
+
+.auth-tab.active {
+  background: white;
+  color: #111;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.input-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.auth-input {
+  width: 100%;
+  padding: 14px 16px;
+  border: 1px solid #e0e0e0;
+  border-radius: 12px;
+  font-size: 15px;
+  transition: border 0.3s, box-shadow 0.3s;
+  background: #f9f9fa;
+}
+
+.auth-input:focus {
+  outline: none;
+  border-color: #cb11ab; /* Фиолетовый акцент WB */
+  background: white;
+  box-shadow: 0 0 0 3px rgba(203, 17, 171, 0.1);
+}
+
+.auth-btn {
+  margin-top: 10px;
+  padding: 16px;
+  background: linear-gradient(135deg, #cb11ab 0%, #a00786 100%);
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.auth-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 15px rgba(203, 17, 171, 0.3);
+}
+
+.auth-btn:active {
+  transform: translateY(0);
+}
+.cart-link {
+  text-decoration: none;
+  padding: 10px 20px;
+  display: flex;
+  align-items: center;
+  margin-top: 0;
+}
