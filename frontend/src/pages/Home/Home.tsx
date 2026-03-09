@@ -35,12 +35,12 @@ export const Home = () => {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ product }),
-        credentials: 'include' // Передаем куки сессии
+        credentials: 'include'
       });
       
       if (res.ok) {
         toast.success(`${product.title} добавлен в корзину!`, {
-          style: { borderRadius: '12px', background: '#333', color: '#fff', fontSize: '15px' }
+          style: { borderRadius: '12px', background: '#333', color: '#fff', fontSize: '14px' }
         });
       } else {
         toast.error('Войдите в аккаунт, чтобы добавить в корзину');
@@ -52,89 +52,104 @@ export const Home = () => {
 
   const handleLogout = () => {
     localStorage.removeItem('isAuth');
-    localStorage.removeItem('userName'); // Удаляем имя при выходе
+    localStorage.removeItem('userName');
     navigate('/auth');
   };
 
-  // Достаем имя пользователя из памяти
   const userName = localStorage.getItem('userName') || 'Пользователь';
 
   return (
     <div className="home-container">
       <Toaster position="bottom-right" reverseOrder={false} /> 
 
-      <header className="home-header" style={{ display: 'flex', flexDirection: 'column', gap: '20px', background: 'white', padding: '20px 30px', borderRadius: '20px', boxShadow: '0 4px 15px rgba(0,0,0,0.03)', marginBottom: '30px' }}>
-        
-        {/* Верхний ряд: Логотип и профиль */}
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '100%', borderBottom: '1px solid #eee', paddingBottom: '15px' }}>
-          <h1 style={{ color: '#cb11ab', margin: 0, fontSize: '28px', fontWeight: '900' }}>L_Shop</h1>
+      {/* Header */}
+      <header style={{ marginBottom: '50px' }}>
+        {/* Верхняя строка: Логотип и профиль */}
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '28px', paddingBottom: '24px', borderBottom: '1px solid #f0f0f0' }}>
+          <h1 style={{ color: '#cb11ab', margin: 0, fontSize: '36px', fontWeight: '900', letterSpacing: '-1.5px' }}>L_Shop</h1>
           
           <div style={{ display: 'flex', alignItems: 'center', gap: '20px' }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-              <div style={{ width: '40px', height: '40px', borderRadius: '50%', background: '#f0f0f4', display: 'flex', justifyContent: 'center', alignItems: 'center', fontWeight: 'bold', color: '#cb11ab' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '12px', borderRight: '1px solid #f0f0f0', paddingRight: '20px' }}>
+              <div style={{ width: '44px', height: '44px', borderRadius: '50%', background: 'linear-gradient(135deg, #cb11ab 0%, #a00786 100%)', display: 'flex', justifyContent: 'center', alignItems: 'center', fontWeight: 'bold', color: 'white', fontSize: '18px' }}>
                 {userName.charAt(0).toUpperCase()}
               </div>
-              <span style={{ fontWeight: 600, fontSize: '16px' }}>{userName}</span>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '2px' }}>
+                <span style={{ fontWeight: 700, fontSize: '15px', color: '#1a1a1a' }}>Привет!</span>
+                <span style={{ fontWeight: '500', fontSize: '13px', color: '#888' }}>{userName}</span>
+              </div>
             </div>
             
             <button 
               onClick={handleLogout} 
-              style={{ background: 'transparent', color: '#888', border: '1px solid #ddd', padding: '8px 15px', borderRadius: '10px', cursor: 'pointer', transition: 'all 0.2s' }}
-              onMouseOver={(e) => { e.currentTarget.style.color = '#ff4d4f'; e.currentTarget.style.borderColor = '#ff4d4f'; }}
-              onMouseOut={(e) => { e.currentTarget.style.color = '#888'; e.currentTarget.style.borderColor = '#ddd'; }}
+              style={{ background: 'transparent', color: '#888', border: '1.5px solid #ddd', padding: '10px 18px', borderRadius: '10px', cursor: 'pointer', transition: 'all 0.2s', fontSize: '14px', fontWeight: '600' }}
+              onMouseOver={(e) => { e.currentTarget.style.color = '#cb11ab'; e.currentTarget.style.borderColor = '#cb11ab'; e.currentTarget.style.background = 'rgba(203, 17, 171, 0.05)'; }}
+              onMouseOut={(e) => { e.currentTarget.style.color = '#888'; e.currentTarget.style.borderColor = '#ddd'; e.currentTarget.style.background = 'transparent'; }}
             >
-              Выйти
+              ⎋ Выход
             </button>
           </div>
         </div>
 
-        {/* Нижний ряд: Поиск, Сортировка, Корзина */}
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '100%', flexWrap: 'wrap', gap: '15px' }}>
-          <div style={{ display: 'flex', gap: '15px', flexGrow: 1, maxWidth: '600px' }}>
+        {/* Нижняя строка: Фильтры и действия */}
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: '20px', flexWrap: 'wrap' }}>
+          <div style={{ display: 'flex', gap: '12px', flex: '1', minWidth: '320px' }}>
             <input 
               type="text" 
-              placeholder="🔍 Я ищу..." 
+              placeholder="🔍 Поиск товаров..." 
               value={search} 
               onChange={(e) => setSearch(e.target.value)} 
-              style={{ flexGrow: 1, padding: '12px 20px', borderRadius: '12px', border: '1px solid #ddd', outline: 'none', background: '#f9f9fa' }} 
+              className="search-input"
+              style={{ flex: 1 }}
             />
             <select 
               value={sort} 
               onChange={(e) => setSort(e.target.value)} 
-              style={{ padding: '12px 20px', borderRadius: '12px', border: '1px solid #ddd', outline: 'none', background: '#f9f9fa', cursor: 'pointer' }}
+              className="sort-select"
             >
-              <option value="asc">Сначала дешевле</option>
-              <option value="desc">Сначала дороже</option>
+              <option value="asc">💰 Дешевле</option>
+              <option value="desc">💎 Дороже</option>
             </select>
           </div>
 
-          <Link to="/cart" className="auth-btn cart-link" style={{ marginTop: 0, padding: '12px 25px', display: 'flex', gap: '10px', alignItems: 'center', textDecoration: 'none' }}>
-            <span style={{ fontSize: '18px' }}>🛒</span> Корзина
-          </Link>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
+            <div style={{ fontSize: '14px', fontWeight: '500', color: '#666', whiteSpace: 'nowrap', background: '#f8f9fb', padding: '8px 16px', borderRadius: '10px' }}>
+              Найдено: <span style={{ color: '#cb11ab', fontWeight: '700' }}>{filteredProducts.length}</span>
+            </div>
+            <Link to="/cart" style={{ background: 'linear-gradient(135deg, #cb11ab 0%, #a00786 100%)', color: 'white', padding: '11px 22px', borderRadius: '10px', display: 'flex', gap: '8px', alignItems: 'center', textDecoration: 'none', fontWeight: '600', fontSize: '14px', transition: 'all 0.3s', cursor: 'pointer', boxShadow: '0 4px 12px rgba(203, 17, 171, 0.2)' }} onMouseOver={(e) => { e.currentTarget.style.transform = 'translateY(-2px)'; e.currentTarget.style.boxShadow = '0 8px 20px rgba(203, 17, 171, 0.3)'; }} onMouseOut={(e) => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = '0 4px 12px rgba(203, 17, 171, 0.2)'; }}>
+              <span style={{ fontSize: '18px' }}>🛒</span> Корзина
+            </Link>
+          </div>
         </div>
       </header>
 
-
-      <div className="products-grid">
-        {filteredProducts.map(product => (
-          <div key={product.id} className="product-card">
-            <img src={product.image} alt={product.title} className="product-image" />
-            <div className="product-info">
-              <h3 data-title className="product-title">{product.title}</h3>
-              <p className="product-category">{product.category}</p>
-              <p data-price className="product-price">{product.price} BYN</p>
-              
-              <button 
-                className="add-to-cart-btn" 
-                disabled={!product.inStock} 
-                onClick={() => handleAddToCart(product)}
-              >
-                {product.inStock ? 'В корзину' : 'Нет в наличии'}
-              </button>
+      {/* Сетка товаров */}
+      {filteredProducts.length > 0 ? (
+        <div className="products-grid">
+          {filteredProducts.map(product => (
+            <div key={product.id} className="product-card">
+              <img src={product.image} alt={product.title} className="product-image" />
+              <div className="product-info">
+                <h3 className="product-title">{product.title}</h3>
+                <p className="product-category">{product.category}</p>
+                <p className="product-price">{product.price} BYN</p>
+                
+                <button 
+                  className="add-to-cart-btn" 
+                  disabled={!product.inStock} 
+                  onClick={() => handleAddToCart(product)}
+                >
+                  {product.inStock ? 'В корзину' : 'Нет в наличии'}
+                </button>
+              </div>
             </div>
-          </div>
-        ))}
-      </div>
+          ))}
+        </div>
+      ) : (
+        <div className="empty-state">
+          <p>😕 Товары не найдены</p>
+          <p style={{ fontSize: '14px', color: '#bbb' }}>Попробуйте другой поиск</p>
+        </div>
+      )}
     </div>
   );
 };

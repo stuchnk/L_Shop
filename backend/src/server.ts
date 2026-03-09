@@ -22,16 +22,21 @@ if (!fs.existsSync(dbPath)) fs.mkdirSync(dbPath); // Создаем папку d
 const getFilePath = (name: string) => path.join(dbPath, name);
 
 // Функции для чтения и записи в JSON
-const readDb = (file: string) => {
+const readDb = (file: string, isArray: boolean = true) => {
     try {
-        if (!fs.existsSync(file)) return Array.isArray(require(file)) ? [] : {};
+        if (!fs.existsSync(file)) return isArray ? [] : {};
         const data = fs.readFileSync(file, 'utf-8');
-        return data ? JSON.parse(data) : [];
+        return data ? JSON.parse(data) : (isArray ? [] : {});
     } catch (e) {
-        return []; // Если файл пуст, возвращаем пустой массив
+        console.error(`Ошибка чтения ${file}:`, e);
+        return isArray ? [] : {}; // Если файл пуст, возвращаем пустой массив или объект
     }
 };
-const writeDb = (file: string, data: any) => fs.writeFileSync(file, JSON.stringify(data, null, 2));
+const writeDb = (file: string, data: any) => {
+    const dir = path.dirname(file);
+    if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
+    fs.writeFileSync(file, JSON.stringify(data, null, 2));
+};
 
 // ================= РОУТЫ АВТОРИЗАЦИИ =================
 
@@ -39,7 +44,7 @@ const writeDb = (file: string, data: any) => fs.writeFileSync(file, JSON.stringi
 app.post('/api/auth/register', (req: Request, res: Response) => {
     const { name, email, password } = req.body;
     const usersFile = getFilePath('users.json');
-    const users = readDb(usersFile) || [];
+    const users = readDb(usersFile, true) || []; // true = массив
 
     // Проверка, есть ли такой email
     if (users.find((u: any) => u.email === email)) {
@@ -58,7 +63,7 @@ app.post('/api/auth/register', (req: Request, res: Response) => {
 // Логин
 app.post('/api/auth/login', (req: Request, res: Response) => {
     const { identifier, password } = req.body;
-    const users = readDb(getFilePath('users.json')) || [];
+    const users = readDb(getFilePath('users.json'), true) || []; // true = массив
     
     // Ищем пользователя по логину/email и паролю
     const user = users.find((u: any) => 
@@ -77,7 +82,7 @@ app.post('/api/auth/login', (req: Request, res: Response) => {
 
 // Получить все товары
 app.get('/api/products', (req: Request, res: Response) => {
-    const products = readDb(getFilePath('products.json'));
+    const products = readDb(getFilePath('products.json'), true); // true = массив
     res.status(200).json(products);
 });
 
@@ -87,7 +92,7 @@ app.get('/api/cart', (req: Request, res: Response) => {
     if (!sessionId) return res.status(401).json({ message: 'Не авторизован' });
     
     const cartsFile = getFilePath('carts.json');
-    const carts = readDb(cartsFile) || {}; // carts.json - это объект { "sessionId": [товары] }
+    const carts = readDb(cartsFile, false) || {}; // carts.json - это объект { "sessionId": [товары] }
     const userCart = carts[sessionId] || [];
     
     res.status(200).json(userCart);
@@ -99,7 +104,7 @@ app.post('/api/cart', (req: Request, res: Response) => {
     if (!sessionId) return res.status(401).json({ message: 'Не авторизован. Войдите в аккаунт.' });
 
     const cartsFile = getFilePath('carts.json');
-    const carts = readDb(cartsFile);
+    const carts = readDb(cartsFile, false) || {}; // Получаем объект
     if (!carts[sessionId]) carts[sessionId] = [];
     
     carts[sessionId].push(req.body.product);
@@ -108,13 +113,32 @@ app.post('/api/cart', (req: Request, res: Response) => {
     res.status(200).json({ message: 'Товар добавлен', cart: carts[sessionId] });
 });
 
+// Удалить товар из корзины по индексу
+app.delete('/api/cart/:index', (req: Request, res: Response) => {
+    const sessionId = req.cookies.sessionId;
+    if (!sessionId) return res.status(401).json({ message: 'Не авторизован' });
+
+    const cartsFile = getFilePath('carts.json');
+    const carts = readDb(cartsFile, false) || {};
+    const index = parseInt(String(req.params.index));
+
+    if (!carts[sessionId] || !carts[sessionId][index]) {
+        return res.status(404).json({ message: 'Товар не найден в корзине' });
+    }
+
+    carts[sessionId].splice(index, 1);
+    writeDb(cartsFile, carts);
+
+    res.status(200).json({ message: 'Товар удален', cart: carts[sessionId] });
+});
+
 // Очистить корзину (после оформления заказа)
 app.post('/api/cart/clear', (req: Request, res: Response) => {
     const sessionId = req.cookies.sessionId;
     if (!sessionId) return res.status(401).json({ message: 'Не авторизован' });
 
     const cartsFile = getFilePath('carts.json');
-    const carts = readDb(cartsFile);
+    const carts = readDb(cartsFile, false) || {}; // Получаем объект
     carts[sessionId] = []; 
     writeDb(cartsFile, carts);
 
