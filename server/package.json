@@ -4,7 +4,7 @@
   "description": "Backend API for L_Shop",
   "main": "dist/server.js",
   "scripts": {
-    "dev": "nodemon server.ts",
+    "dev": "npx ts-node-dev --respawn server.ts",
     "build": "tsc",
     "start": "node dist/server.js"
   },

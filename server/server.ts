@@ -1,21 +1,17 @@
-import express, { Request, Response } from 'express';
+import express from 'express';
 import cors from 'cors';
-import cookieParser from 'cookie-parser';
-import { apiRouter } from './src/router/router'; // Подключаем роутер команды
+import { apiRouter } from './src/router/router';
 
 const app = express();
-const PORT = 3000;
 
-app.use(cors({ origin: 'http://localhost:5173', credentials: true }));
+// РАЗРЕШАЕМ ЗАПРОСЫ (CORS)
+app.use(cors({
+  origin: 'http://localhost:5173',
+  credentials: true
+}));
 app.use(express.json());
-app.use(cookieParser());
-
-// Подключаем все маршруты из папки src/router
 app.use('/api', apiRouter);
 
-app.listen(PORT, () => {
-    console.log(`====================================`);
-    console.log(`🚀 Сервер запущен на порту ${PORT}`);
-    console.log(`🔗 API: http://localhost:${PORT}/api/ping`);
-    console.log(`====================================`);
+app.listen(3000, () => {
+    console.log('🚀 Server started on http://localhost:3000');
 });

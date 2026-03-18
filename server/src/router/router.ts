@@ -1,19 +1,14 @@
 import { Router, Request, Response } from 'express';
+import { productController } from '../controllers/products/products.controller';
 
-// Создаем и ЭКСПОРТИРУЕМ роутер (это ключевое слово решает вашу ошибку)
-export const apiRouter = Router();
+export const apiRouter: Router = Router();
 
-// Тестовый маршрут
-apiRouter.get('/ping', (req: Request, res: Response) => {
-    res.json({ message: 'API через Router работает!', time: new Date() });
+// Пинг
+apiRouter.get('/ping', (_req: Request, res: Response) => {
+  res.json({ message: 'API работает!', time: new Date() });
 });
 
-// ==========================================
-// Сюда ваша команда будет добавлять свои роуты:
-// ==========================================
-
-// import { usersController } from '../controllers/users/users.controller';
-// apiRouter.post('/users/register', usersController.register);
-
-// import { basketController } from '../controllers/basket/basket.controller';
-// apiRouter.get('/basket', basketController.getBasket);
+// Продукты
+apiRouter.get('/products', productController.getAll);
+apiRouter.get('/products/categories', productController.getCategories);
+apiRouter.get('/products/:id', productController.getById);

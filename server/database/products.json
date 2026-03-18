@@ -1,0 +1,112 @@
+[
+  {
+    "id": 1,
+    "name": "Ноутбук ASUS VivoBook 15",
+    "description": "15.6 дюймов, Intel i5, 16GB RAM, 512GB SSD. Идеален для работы и учёбы.",
+    "price": 2499.99,
+    "category": "Электроника",
+    "image": "https://placehold.co/300x200/e2e8f0/1a1a2e?text=Laptop",
+    "available": true,
+    "quantity": 15,
+    "rating": 4.5
+  },
+  {
+    "id": 2,
+    "name": "Наушники Sony WH-1000XM5",
+    "description": "Беспроводные наушники с активным шумоподавлением и 30ч автономности.",
+    "price": 349.99,
+    "category": "Электроника",
+    "image": "https://placehold.co/300x200/e2e8f0/1a1a2e?text=Headphones",
+    "available": true,
+    "quantity": 30,
+    "rating": 4.8
+  },
+  {
+    "id": 3,
+    "name": "Кроссовки Nike Air Max 90",
+    "description": "Классические кроссовки для бега и повседневной носки.",
+    "price": 129.99,
+    "category": "Обувь",
+    "image": "https://placehold.co/300x200/e2e8f0/1a1a2e?text=Sneakers",
+    "available": true,
+    "quantity": 50,
+    "rating": 4.3
+  },
+  {
+    "id": 4,
+    "name": "Книга 'Clean Code'",
+    "description": "Роберт Мартин — классика по написанию чистого и поддерживаемого кода.",
+    "price": 29.99,
+    "category": "Книги",
+    "image": "https://placehold.co/300x200/e2e8f0/1a1a2e?text=Book",
+    "available": true,
+    "quantity": 100,
+    "rating": 4.9
+  },
+  {
+    "id": 5,
+    "name": "Смартфон Samsung Galaxy S24",
+    "description": "Флагман с AI-функциями, 6.2 дюймов, 256GB.",
+    "price": 999.99,
+    "category": "Электроника",
+    "image": "https://placehold.co/300x200/e2e8f0/1a1a2e?text=Phone",
+    "available": false,
+    "quantity": 0,
+    "rating": 4.6
+  },
+  {
+    "id": 6,
+    "name": "Рюкзак Xiaomi Mi Urban",
+    "description": "Городской рюкзак с отделением для ноутбука до 15.6 дюймов.",
+    "price": 49.99,
+    "category": "Аксессуары",
+    "image": "https://placehold.co/300x200/e2e8f0/1a1a2e?text=Backpack",
+    "available": true,
+    "quantity": 25,
+    "rating": 4.2
+  },
+  {
+    "id": 7,
+    "name": "Клавиатура Logitech MX Keys",
+    "description": "Беспроводная клавиатура с подсветкой и мультидевайс подключением.",
+    "price": 119.99,
+    "category": "Электроника",
+    "image": "https://placehold.co/300x200/e2e8f0/1a1a2e?text=Keyboard",
+    "available": true,
+    "quantity": 20,
+    "rating": 4.7
+  },
+  {
+    "id": 8,
+    "name": "Футболка Uniqlo Supima",
+    "description": "Базовая хлопковая футболка премиум качества, белая.",
+    "price": 19.99,
+    "category": "Одежда",
+    "image": "https://placehold.co/300x200/e2e8f0/1a1a2e?text=T-Shirt",
+    "available": true,
+    "quantity": 200,
+    "rating": 4.0
+  },
+  {
+    "id": 9,
+    "name": "Монитор Dell UltraSharp 27",
+    "description": "27 дюймов, 4K UHD, IPS, USB-C. Для профессиональной работы.",
+    "price": 549.99,
+    "category": "Электроника",
+    "image": "https://placehold.co/300x200/e2e8f0/1a1a2e?text=Monitor",
+    "available": true,
+    "quantity": 10,
+    "rating": 4.6
+  },
+  {
+    "id": 10,
+    "name": "Кофемашина DeLonghi Magnifica",
+    "description": "Автоматическая кофемашина с капучинатором.",
+    "price": 399.99,
+    "category": "Бытовая техника",
+    "image": "https://placehold.co/300x200/e2e8f0/1a1a2e?text=Coffee",
+    "available": true,
+    "quantity": 8,
+    "rating": 4.4
+  }
+]
