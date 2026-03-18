@@ -1,0 +1,27 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "module": "CommonJS",
+    "rootDir": "./",
+    "outDir": "./dist",
+    
+    "esModuleInterop": true,         /* ИМЕННО ЭТОТ ФЛАГ УБИРАЕТ ОШИБКУ 1259 */
+    "allowSyntheticDefaultImports": true, /* Дополнительная страховка для импортов */
+    
+    "forceConsistentCasingInFileNames": true,
+    "skipLibCheck": true,
+    "resolveJsonModule": true,
+    
+    "strict": true,
+    "noImplicitAny": true,
+    "strictNullChecks": true
+  },
+  "include": [
+    "src/**/*",
+    "server.ts"
+  ],
+  "exclude": [
+    "node_modules",
+    "dist"
+  ]
+}
