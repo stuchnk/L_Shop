@@ -4,6 +4,7 @@ import { renderProductCard } from '../productCard/productCard';
 import { renderFilters } from '../filters/filters';
 import { Product, FilterState, CartItem } from '../../types/product';
 import { navigateTo } from '../../utils/router';
+import { isAuthenticated } from '../../utils/auth';
 
 let currentFilters: FilterState = {
   search: '',
@@ -13,9 +14,7 @@ let currentFilters: FilterState = {
 };
 
 const addToCart = (product: Product, quantity: number): void => {
-  const hasCookie: boolean = document.cookie.length > 0;
-
-  if (!hasCookie) {
+  if (!isAuthenticated()) {
     alert('Для добавления в корзину необходимо авторизоваться!');
     navigateTo('/login');
     return;
@@ -38,7 +37,7 @@ const addToCart = (product: Product, quantity: number): void => {
   }
 
   localStorage.setItem('cart', JSON.stringify(cart));
-  alert(`${product.name} (×${quantity}) добавлен в корзину!`);
+  navigateTo('/cart');
 };
 
 const openProduct = (product: Product): void => {
@@ -50,7 +49,11 @@ const buildProductGrid = (products: Product[]): HTMLElement => {
     return createElement({
       tag: 'div',
       className: 'products__empty',
-      innerHTML: '<div class="products__empty-icon">🔍</div><p>Товары не найдены</p><p class="products__empty-hint">Попробуйте изменить параметры фильтрации</p>',
+      innerHTML: `
+        <div>🔍</div>
+        <h3>Товары не найдены</h3>
+        <p>Попробуйте изменить параметры фильтрации</p>
+      `,
     });
   }
 
@@ -58,7 +61,10 @@ const buildProductGrid = (products: Product[]): HTMLElement => {
     tag: 'div',
     className: 'products__grid',
     children: products.map((p: Product) =>
-      renderProductCard(p, { onAddToCart: addToCart, onOpenProduct: openProduct })
+      renderProductCard(p, {
+        onAddToCart: addToCart,
+        onOpenProduct: openProduct,
+      })
     ),
   });
 };
@@ -78,13 +84,25 @@ export const renderHomePage = async (): Promise<void> => {
         tag: 'div',
         className: 'home',
         children: [
-          createElement({ tag: 'div', className: 'home__sidebar', attributes: { id: 'sidebar' } }),
+          createElement({
+            tag: 'div',
+            className: 'home__sidebar',
+            attributes: { id: 'sidebar' },
+          }),
           createElement({
             tag: 'div',
             className: 'home__content',
             children: [
-              createElement({ tag: 'div', className: 'home__header', attributes: { id: 'products-header' } }),
-              createElement({ tag: 'div', className: 'home__grid', attributes: { id: 'products-grid' } }),
+              createElement({
+                tag: 'div',
+                className: 'home__header',
+                attributes: { id: 'products-header' },
+              }),
+              createElement({
+                tag: 'div',
+                className: 'home__grid',
+                attributes: { id: 'products-grid' },
+              }),
             ],
           }),
         ],
@@ -110,7 +128,11 @@ export const renderHomePage = async (): Promise<void> => {
           tag: 'div',
           className: 'home__title-row',
           children: [
-            createElement({ tag: 'h2', className: 'home__title', textContent: 'Каталог товаров' }),
+            createElement({
+              tag: 'h2',
+              className: 'home__title',
+              textContent: 'Каталог товаров',
+            }),
             createElement({
               tag: 'span',
               className: 'home__count',
@@ -128,10 +150,12 @@ export const renderHomePage = async (): Promise<void> => {
           onFilterChange: async (newFilters: FilterState) => {
             currentFilters = newFilters;
             const filtered: Product[] = await fetchProducts(currentFilters);
+
             if (grid) {
               grid.innerHTML = '';
               grid.appendChild(buildProductGrid(filtered));
             }
+
             const countEl: HTMLElement | null = document.getElementById('products-count');
             if (countEl) countEl.textContent = `${filtered.length} товаров`;
           },
@@ -144,6 +168,7 @@ export const renderHomePage = async (): Promise<void> => {
     }
   } catch {
     const grid: HTMLElement | null = document.getElementById('products-grid');
+
     if (grid) {
       grid.appendChild(
         createElement({

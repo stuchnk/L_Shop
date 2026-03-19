@@ -15,6 +15,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: 24px;
 }
 
 .header__logo {
@@ -23,6 +24,7 @@
   cursor: pointer;
   letter-spacing: -0.5px;
   transition: opacity 0.2s;
+  flex-shrink: 0;
 }
 
 .header__logo:hover {
@@ -31,7 +33,10 @@
 
 .header__nav {
   display: flex;
-  gap: 28px;
+  align-items: center;
+  gap: 18px;
+  flex-wrap: wrap;
+  justify-content: flex-end;
 }
 
 .header__link {
@@ -41,6 +46,7 @@
   font-weight: 500;
   transition: color 0.2s;
   position: relative;
+  line-height: 1;
 }
 
 .header__link:hover {
@@ -60,4 +66,60 @@
 
 .header__link:hover::after {
   width: 100%;
+}
+
+.header__profile {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 7px 12px 7px 8px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.06);
+  color: #fff;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.2s ease;
+  font: inherit;
+  line-height: 1;
+}
+
+.header__profile:hover {
+  background: rgba(255, 255, 255, 0.12);
+  transform: translateY(-1px);
+}
+
+.header__avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  color: #fff;
+  font-weight: 700;
+  font-size: 13px;
+  flex-shrink: 0;
+}
+
+.header__profile-name {
+  color: #fff;
+  font-size: 14px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.header__logout {
+  border: none;
+  background: transparent;
+  color: #fca5a5;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1;
+  padding: 0;
+}
+
+.header__logout:hover {
+  color: #fff;
 }

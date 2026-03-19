@@ -70,3 +70,343 @@ body {
 .products__grid {
   animation: fadeIn 0.3s ease;
 }
+.auth-page {
+  min-height: calc(100vh - 120px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 16px 56px;
+  background:
+    radial-gradient(circle at top left, rgba(164, 205, 57, 0.14), transparent 30%),
+    radial-gradient(circle at bottom right, rgba(63, 81, 181, 0.08), transparent 28%);
+}
+
+.auth-card {
+  width: 100%;
+  max-width: 460px;
+  padding: 32px;
+  border-radius: 24px;
+  background: #ffffff;
+  box-shadow: 0 24px 60px rgba(15, 23, 42, 0.08);
+  border: 1px solid rgba(15, 23, 42, 0.06);
+}
+
+.auth-card__badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 14px;
+  margin-bottom: 18px;
+  border-radius: 999px;
+  background: rgba(164, 205, 57, 0.16);
+  color: #3d4b1f;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.auth-card__title {
+  margin: 0 0 10px;
+  font-size: 32px;
+  line-height: 1.1;
+  color: #111827;
+}
+
+.auth-card__subtitle {
+  margin: 0 0 24px;
+  color: #6b7280;
+  line-height: 1.5;
+}
+
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.auth-form__label {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  color: #374151;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.auth-form__input {
+  height: 48px;
+  padding: 0 14px;
+  border-radius: 14px;
+  border: 1px solid #d1d5db;
+  outline: none;
+  font-size: 15px;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.auth-form__input:focus {
+  border-color: #a4cd39;
+  box-shadow: 0 0 0 4px rgba(164, 205, 57, 0.16);
+}
+
+.auth-form__button {
+  height: 50px;
+  border: none;
+  border-radius: 14px;
+  background: linear-gradient(135deg, #a4cd39, #8db42d);
+  color: #1f2937;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.auth-form__button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 16px 30px rgba(164, 205, 57, 0.25);
+}
+
+.auth-form__error {
+  min-height: 20px;
+  margin: 0;
+  color: #dc2626;
+  font-size: 14px;
+}
+
+.auth-card__footer {
+  margin-top: 20px;
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  color: #6b7280;
+  font-size: 14px;
+}
+
+.auth-card__footer a {
+  color: #111827;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.auth-card__footer a:hover {
+  text-decoration: underline;
+}
+.auth-page {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 48px 16px;
+}
+
+.auth-card {
+  width: 100%;
+  max-width: 460px;
+  padding: 32px;
+  border-radius: 24px;
+  background: #ffffff;
+  box-shadow: 0 24px 60px rgba(15, 23, 42, 0.08);
+  border: 1px solid rgba(15, 23, 42, 0.06);
+}
+
+.auth-card__badge {
+  display: inline-flex;
+  padding: 8px 14px;
+  margin-bottom: 18px;
+  border-radius: 999px;
+  background: rgba(102, 126, 234, 0.12);
+  color: #3b4aa8;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.auth-card__title {
+  margin-bottom: 10px;
+  font-size: 32px;
+  line-height: 1.1;
+  color: #111827;
+}
+
+.auth-card__subtitle {
+  margin-bottom: 24px;
+  color: #6b7280;
+  line-height: 1.5;
+}
+
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.auth-form__label {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  color: #374151;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.auth-form__input {
+  height: 48px;
+  padding: 0 14px;
+  border-radius: 14px;
+  border: 1px solid #d1d5db;
+  outline: none;
+  font-size: 15px;
+}
+
+.auth-form__button,
+.auth-card__switch,
+.profile-card__action {
+  border: none;
+  border-radius: 14px;
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  color: #fff;
+  cursor: pointer;
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.auth-form__button {
+  height: 50px;
+}
+
+.auth-card__switch,
+.profile-card__action {
+  padding: 12px 16px;
+}
+
+.auth-form__error,
+.profile-form__message {
+  min-height: 20px;
+  margin: 0;
+  color: #dc2626;
+  font-size: 14px;
+}
+
+.auth-card__footer {
+  margin-top: 18px;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  flex-wrap: wrap;
+  color: #6b7280;
+  font-size: 14px;
+}
+
+.profile-page {
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 32px 24px 48px;
+}
+
+.profile-layout {
+  display: grid;
+  gap: 24px;
+}
+
+.profile-card {
+  background: #fff;
+  border-radius: 24px;
+  padding: 28px;
+  box-shadow: 0 8px 30px rgba(15, 23, 42, 0.06);
+}
+
+.profile-card__head {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.profile-card__avatar {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  color: #fff;
+  font-size: 24px;
+  font-weight: 800;
+}
+
+.profile-card__title {
+  font-size: 28px;
+  color: #1a202c;
+}
+
+.profile-card__subtitle {
+  margin-bottom: 16px;
+  font-size: 22px;
+  color: #1a202c;
+}
+
+.profile-card__text {
+  color: #718096;
+}
+
+.profile-card__info-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 16px;
+}
+
+.profile-card__info-item {
+  padding: 16px;
+  border-radius: 16px;
+  background: #f7fafc;
+}
+
+.profile-card__label {
+  display: block;
+  margin-bottom: 6px;
+  color: #718096;
+  font-size: 13px;
+}
+
+.profile-form {
+  display: grid;
+  gap: 14px;
+}
+
+.profile-form__input,
+.profile-form__textarea {
+  width: 100%;
+  padding: 14px 16px;
+  border: 1px solid #d1d5db;
+  border-radius: 14px;
+  font-size: 15px;
+  outline: none;
+}
+
+.profile-form__textarea {
+  min-height: 120px;
+  resize: vertical;
+}
+
+.profile-history__item {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  align-items: flex-start;
+  padding: 18px;
+  border-radius: 16px;
+  background: #f7fafc;
+}
+
+.profile-history__item p {
+  margin-top: 6px;
+  color: #718096;
+}
+
+.profile-history__status {
+  white-space: nowrap;
+  padding: 8px 12px;
+  border-radius: 999px;
+  background: #edf2f7;
+  color: #4a5568;
+  font-size: 13px;
+  font-weight: 700;
+}

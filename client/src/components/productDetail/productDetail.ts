@@ -2,6 +2,7 @@ import { createElement } from '../../utils/createElement';
 import { fetchProduct } from '../../api/productApi';
 import { Product, CartItem } from '../../types/product';
 import { navigateTo } from '../../utils/router';
+import { isAuthenticated } from '../../utils/auth';
 
 export const renderProductDetail = async (productId: string): Promise<void> => {
   const app: HTMLElement | null = document.getElementById('app');
@@ -14,11 +15,12 @@ export const renderProductDetail = async (productId: string): Promise<void> => {
     tag: 'main',
     className: 'main',
   });
+
   app.appendChild(main);
 
   try {
     const product: Product = await fetchProduct(parseInt(productId, 10));
-    let qty: number = 1;
+    let qty = 1;
 
     const qtyDisplay: HTMLElement = createElement({
       tag: 'span',
@@ -30,19 +32,16 @@ export const renderProductDetail = async (productId: string): Promise<void> => {
       tag: 'div',
       className: 'detail',
       children: [
-        // Кнопка назад
         createElement({
           tag: 'button',
           className: 'detail__back',
           textContent: '← Назад к товарам',
           onClick: () => navigateTo('/'),
         }),
-
         createElement({
           tag: 'div',
           className: 'detail__content',
           children: [
-            // Картинка
             createElement({
               tag: 'div',
               className: 'detail__img-wrap',
@@ -54,8 +53,6 @@ export const renderProductDetail = async (productId: string): Promise<void> => {
                 }),
               ],
             }),
-
-            // Информация
             createElement({
               tag: 'div',
               className: 'detail__info',
@@ -94,12 +91,12 @@ export const renderProductDetail = async (productId: string): Promise<void> => {
                     createElement({
                       tag: 'span',
                       className: `detail__stock ${product.available ? 'detail__stock--yes' : 'detail__stock--no'}`,
-                      textContent: product.available ? `В наличии (${product.quantity} шт.)` : 'Нет в наличии',
+                      textContent: product.available
+                        ? `В наличии (${product.quantity} шт.)`
+                        : 'Нет в наличии',
                     }),
                   ],
                 }),
-
-                // Счётчик + кнопка
                 createElement({
                   tag: 'div',
                   className: 'detail__actions',
@@ -141,8 +138,7 @@ export const renderProductDetail = async (productId: string): Promise<void> => {
                       onClick: () => {
                         if (!product.available) return;
 
-                        const hasCookie: boolean = document.cookie.length > 0;
-                        if (!hasCookie) {
+                        if (!isAuthenticated()) {
                           alert('Для добавления в корзину необходимо авторизоваться!');
                           navigateTo('/login');
                           return;
@@ -165,7 +161,7 @@ export const renderProductDetail = async (productId: string): Promise<void> => {
                         }
 
                         localStorage.setItem('cart', JSON.stringify(cart));
-                        alert(`${product.name} (×${qty}) добавлен в корзину!`);
+                        navigateTo('/cart');
                       },
                     }),
                   ],
