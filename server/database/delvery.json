@@ -1,0 +1,76 @@
+[
+  {
+    "userId": 1773911354490,
+    "items": [
+      {
+        "productId": 1,
+        "name": "Ноутбук ASUS VivoBook 15",
+        "price": 2499.99,
+        "quantity": 1
+      },
+      {
+        "productId": 2,
+        "name": "Наушники Sony WH-1000XM5",
+        "price": 349.99,
+        "quantity": 1
+      }
+    ],
+    "delivery": {
+      "city": "t4g",
+      "address": "132",
+      "phone": "3R3434",
+      "email": "ehrbb@gmail.com",
+      "comment": "TRB"
+    },
+    "payment": {
+      "cardNumber": "RTB",
+      "cardHolder": "RTB",
+      "expiry": "RTB",
+      "cvv": "RTB"
+    },
+    "totalPrice": 2849.9799999999996,
+    "id": 1774001497591,
+    "createdAt": "2026-03-20T10:11:37.591Z",
+    "status": "pending"
+  },
+  {
+    "userId": 1773911354490,
+    "items": [
+      {
+        "productId": 1,
+        "name": "Ноутбук ASUS VivoBook 15",
+        "price": 2499.99,
+        "quantity": 1
+      },
+      {
+        "productId": 2,
+        "name": "Наушники Sony WH-1000XM5",
+        "price": 349.99,
+        "quantity": 1
+      },
+      {
+        "productId": 3,
+        "name": "Кроссовки Nike Air Max 90",
+        "price": 129.99,
+        "quantity": 2
+      }
+    ],
+    "delivery": {
+      "city": "t4g",
+      "address": "132",
+      "phone": "3R3434",
+      "email": "uig@gmail.com",
+      "comment": "TRB"
+    },
+    "payment": {
+      "cardNumber": "2332",
+      "cardHolder": "ddf",
+      "expiry": "dd",
+      "cvv": "dd"
+    },
+    "totalPrice": 3109.9599999999996,
+    "id": 1774001559666,
+    "createdAt": "2026-03-20T10:12:39.666Z",
+    "status": "pending"
+  }
+]

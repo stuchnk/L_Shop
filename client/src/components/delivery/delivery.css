@@ -1,0 +1,96 @@
+.delivery-page {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 2rem 1rem;
+  }
+  
+  .delivery-page__title {
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+    color: #1a1a2e;
+  }
+  
+  .delivery-form fieldset {
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  .delivery-form legend {
+    font-weight: 600;
+    color: #1a1a2e;
+    padding: 0 0.5rem;
+  }
+  
+  .delivery-form label {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+    margin-bottom: 1rem;
+    font-size: 0.9rem;
+    color: #444;
+  }
+  
+  .delivery-form input,
+  .delivery-form textarea {
+    padding: 0.7rem;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    transition: border-color 0.2s;
+  }
+  
+  .delivery-form input:focus,
+  .delivery-form textarea:focus {
+    outline: none;
+    border-color: #667eea;
+  }
+  
+  .delivery-form textarea {
+    min-height: 60px;
+    resize: vertical;
+  }
+  
+  .delivery-form__row {
+    display: flex;
+    gap: 1rem;
+  }
+  
+  .delivery-form__row label {
+    flex: 1;
+  }
+  
+  .delivery-form__error {
+    color: #dc2626;
+    font-size: 0.9rem;
+    min-height: 1.2rem;
+    margin-bottom: 0.5rem;
+  }
+  
+  .delivery-form__submit {
+    width: 100%;
+    padding: 0.9rem;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    font-size: 1.05rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: opacity 0.2s;
+  }
+  
+  .delivery-form__submit:hover {
+    opacity: 0.9;
+  }
+  
+  .delivery-success {
+    text-align: center;
+    padding: 4rem 1rem;
+  }
+  
+  .delivery-success h2 {
+    color: #16a34a;
+    margin-bottom: 0.5rem;
+  }

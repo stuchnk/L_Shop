@@ -1,10 +1,11 @@
 import { createElement } from '../../utils/createElement';
+import { addToBasketApi } from '../../api/basketApi';
 import { fetchProducts, fetchCategories } from '../../api/productApi';
 import { renderProductCard } from '../productCard/productCard';
 import { renderFilters } from '../filters/filters';
-import { Product, FilterState, CartItem } from '../../types/product';
+import { Product, FilterState } from '../../types/product';
 import { navigateTo } from '../../utils/router';
-import { isAuthenticated } from '../../utils/auth';
+import { isAuthenticated, clearSession } from '../../utils/auth';
 
 let currentFilters: FilterState = {
   search: '',
@@ -13,31 +14,31 @@ let currentFilters: FilterState = {
   available: '',
 };
 
-const addToCart = (product: Product, quantity: number): void => {
+const addToCart = async (product: Product, quantity: number): Promise<void> => {
   if (!isAuthenticated()) {
     alert('Для добавления в корзину необходимо авторизоваться!');
     navigateTo('/login');
     return;
   }
 
-  const raw: string | null = localStorage.getItem('cart');
-  const cart: CartItem[] = raw ? JSON.parse(raw) : [];
-  const idx: number = cart.findIndex((item: CartItem) => item.productId === product.id);
-
-  if (idx >= 0) {
-    cart[idx].quantity += quantity;
-  } else {
-    cart.push({
+  try {
+    await addToBasketApi({
       productId: product.id,
       name: product.name,
       price: product.price,
       quantity,
       image: product.image,
     });
+    alert('✅ Товар добавлен в корзину!');
+  } catch (error: unknown) {
+    if (error instanceof Error && error.message === 'Unauthorized') {
+      // handleUnauthorized в basketApi уже обработал
+      return;
+    }
+    clearSession();
+    alert('Сессия истекла. Войдите заново.');
+    navigateTo('/login');
   }
-
-  localStorage.setItem('cart', JSON.stringify(cart));
-  navigateTo('/cart');
 };
 
 const openProduct = (product: Product): void => {
@@ -156,7 +157,8 @@ export const renderHomePage = async (): Promise<void> => {
               grid.appendChild(buildProductGrid(filtered));
             }
 
-            const countEl: HTMLElement | null = document.getElementById('products-count');
+            const countEl: HTMLElement | null =
+              document.getElementById('products-count');
             if (countEl) countEl.textContent = `${filtered.length} товаров`;
           },
         })

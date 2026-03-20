@@ -1,5 +1,6 @@
 import express from 'express';
 import cors from 'cors';
+import cookieParser from 'cookie-parser';
 import { apiRouter } from './src/router/router';
 
 const app = express();
@@ -10,8 +11,8 @@ app.use(
     credentials: true,
   })
 );
-
 app.use(express.json());
+app.use(cookieParser());
 app.use('/api', apiRouter);
 
 app.listen(3000, () => {

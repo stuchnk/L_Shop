@@ -16,5 +16,11 @@
     "name": "РАК",
     "email": "rak@gmail.com",
     "password": "123456"
+  },
+  {
+    "id": 1773990138137,
+    "name": "Vlad",
+    "email": "vlad@gmail.com",
+    "password": "V12345"
   }
 ]

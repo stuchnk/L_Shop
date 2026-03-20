@@ -95,3 +95,14 @@ const createNavLink = (text: string, path: string): HTMLElement => {
     },
   });
 };
+// Пример внутри твоего Header компонента
+const basketBtn = createElement({
+  tag: 'button',
+  className: 'header-basket-btn',
+  textContent: '🛒 Корзина',
+  onClick: () => {
+      // Меняем хэш в URL, чтобы роутер переключил страницу
+      window.location.hash = '#/basket';
+  }
+  
+});
