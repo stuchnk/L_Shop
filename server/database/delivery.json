@@ -1,0 +1,58 @@
+[
+  {
+    "userId": 1773911354490,
+    "items": [
+      {
+        "productId": 1,
+        "name": "Ноутбук ASUS VivoBook 15",
+        "price": 2499.99,
+        "quantity": 15
+      }
+    ],
+    "delivery": {
+      "city": "t4g",
+      "address": "132",
+      "phone": "3R3434",
+      "email": "fwerf@GMAIL.COM",
+      "comment": "TRB"
+    },
+    "payment": {
+      "cardNumber": "2323",
+      "cardHolder": "VFE",
+      "expiry": "ERV",
+      "cvv": "EVR"
+    },
+    "totalPrice": 37499.85,
+    "id": 1774194766526,
+    "createdAt": "2026-03-22T15:52:46.526Z",
+    "status": "pending"
+  },
+  {
+    "userId": 1773911354490,
+    "items": [
+      {
+        "productId": 1,
+        "name": "Ноутбук ASUS VivoBook 15",
+        "price": 2499.99,
+        "quantity": 15
+      }
+    ],
+    "delivery": {
+      "city": "t4g",
+      "address": "132",
+      "phone": "3R3434",
+      "email": "gf@gmail.com",
+      "comment": "TRB"
+    },
+    "payment": {
+      "cardNumber": "234",
+      "cardHolder": "retb",
+      "expiry": "rb",
+      "cvv": "rtb"
+    },
+    "totalPrice": 37499.85,
+    "id": 1774195605594,
+    "createdAt": "2026-03-22T16:06:45.594Z",
+    "status": "pending"
+  }
+]

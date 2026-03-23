@@ -19,7 +19,43 @@ export const createProfilePage = (): HTMLElement => {
 
     return page;
   }
-
+  function renderOrders(orders: any[]) {
+    const container = document.getElementById('orders-container');
+  
+    if (!container) return;
+  
+    if (!orders.length) {
+      container.innerHTML = `
+        <div class="profile-history__item">
+          <div>
+            <strong>История заказов пока пуста</strong>
+            <p>После оформления заказа здесь будут отображаться покупки.</p>
+          </div>
+          <span class="profile-history__status">Нет заказов</span>
+        </div>
+      `;
+      return;
+    }
+  
+    container.innerHTML = orders.map(order => `
+      <div class="profile-history__item">
+        <div>
+          <strong>Заказ #${order.id}</strong>
+          <p>Дата: ${new Date(order.date).toLocaleString()}</p>
+          <p>Сумма: ${order.total} ₽</p>
+          <p>Адрес: ${order.address}</p>
+  
+          <ul>
+            ${order.items.map((item: any) => `
+              <li>Товар ID: ${item.productId} — ${item.quantity} шт.</li>
+            `).join('')}
+          </ul>
+        </div>
+  
+        <span class="profile-history__status">Оформлен</span>
+      </div>
+    `).join('');
+  }
   const user = getUser();
   const delivery = getDeliveryProfile();
 
@@ -61,15 +97,9 @@ export const createProfilePage = (): HTMLElement => {
 
       <div class="profile-card">
         <h2 class="profile-card__subtitle">История покупок</h2>
-        <div class="profile-history">
-          <div class="profile-history__item">
-            <div>
-              <strong>История заказов пока пуста</strong>
-              <p>После оформления заказа здесь будут отображаться покупки и доставки.</p>
-            </div>
-            <span class="profile-history__status">Нет заказов</span>
-          </div>
-        </div>
+       <div class="profile-history" id="orders-container">
+  <p>Загрузка заказов...</p>
+</div>
       </div>
     </section>
   `;
@@ -91,6 +121,21 @@ export const createProfilePage = (): HTMLElement => {
 
     message.textContent = 'Данные для доставки сохранены';
   });
+  const ordersContainer = page.querySelector('#orders-container') as HTMLElement;
 
+const token = localStorage.getItem('token');
+
+fetch(`http://localhost:3000/api/orders/${user?.id}`, {
+  headers: {
+    Authorization: `Bearer ${token}`,
+  },
+})
+  .then(res => res.json())
+  .then(orders => {
+    renderOrders(orders);
+  })
+  .catch(() => {
+    ordersContainer.innerHTML = '<p>Ошибка загрузки заказов</p>';
+  });
   return page;
 };
