@@ -11,12 +11,25 @@ const getInitials = (name: string): string => {
     .toUpperCase();
 };
 
+const createNavLink = (text: string, path: string): HTMLElement => {
+  return createElement({
+    tag: 'a',
+    className: 'header__link',
+    textContent: text,
+    attributes: { href: path },
+    onClick: (e: MouseEvent) => {
+      e.preventDefault();
+      navigateTo(path);
+    },
+  });
+};
+
 export const renderHeader = (): HTMLElement => {
   const user = getUser();
   const auth = isAuthenticated();
 
   const navChildren: HTMLElement[] = [
-    createNavLink('Главная', '/'),
+    createNavLink('Каталог', '/'),
     createNavLink('Корзина', '/cart'),
   ];
 
@@ -35,8 +48,19 @@ export const renderHeader = (): HTMLElement => {
           }),
           createElement({
             tag: 'span',
-            className: 'header__profile-name',
-            textContent: user.name,
+            className: 'header__profile-copy',
+            children: [
+              createElement({
+                tag: 'span',
+                className: 'header__profile-label',
+                textContent: 'Профиль',
+              }),
+              createElement({
+                tag: 'span',
+                className: 'header__profile-name',
+                textContent: user.name,
+              }),
+            ],
           }),
         ],
       })
@@ -67,10 +91,33 @@ export const renderHeader = (): HTMLElement => {
         className: 'header__inner',
         children: [
           createElement({
-            tag: 'div',
-            className: 'header__logo',
-            textContent: '🛒 L_Shop',
+            tag: 'button',
+            className: 'header__brand',
+            attributes: { type: 'button' },
             onClick: () => navigateTo('/'),
+            children: [
+              createElement({
+                tag: 'span',
+                className: 'header__logo-mark',
+                textContent: 'LS',
+              }),
+              createElement({
+                tag: 'span',
+                className: 'header__logo-copy',
+                children: [
+                  createElement({
+                    tag: 'span',
+                    className: 'header__logo-title',
+                    textContent: 'L_Shop Atelier',
+                  }),
+                  createElement({
+                    tag: 'span',
+                    className: 'header__logo-subtitle',
+                    textContent: 'curated objects for everyday life',
+                  }),
+                ],
+              }),
+            ],
           }),
           createElement({
             tag: 'nav',
@@ -82,27 +129,3 @@ export const renderHeader = (): HTMLElement => {
     ],
   });
 };
-
-const createNavLink = (text: string, path: string): HTMLElement => {
-  return createElement({
-    tag: 'a',
-    className: 'header__link',
-    textContent: text,
-    attributes: { href: path },
-    onClick: (e: MouseEvent) => {
-      e.preventDefault();
-      navigateTo(path);
-    },
-  });
-};
-// Пример внутри твоего Header компонента
-const basketBtn = createElement({
-  tag: 'button',
-  className: 'header-basket-btn',
-  textContent: '🛒 Корзина',
-  onClick: () => {
-      // Меняем хэш в URL, чтобы роутер переключил страницу
-      window.location.hash = '#/basket';
-  }
-  
-});

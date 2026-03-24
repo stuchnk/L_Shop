@@ -14,9 +14,26 @@ interface DeliveryPayload {
     };
   }
   
-  interface DeliveryOrder {
+  export interface DeliveryOrderItem {
+    productId: number;
+    name: string;
+    price: number;
+    quantity: number;
+  }
+
+  export interface DeliveryOrderAddress {
+    city: string;
+    address: string;
+    phone: string;
+    email: string;
+    comment: string;
+  }
+
+  export interface DeliveryOrder {
     id: number;
     userId: number;
+    items: DeliveryOrderItem[];
+    delivery: DeliveryOrderAddress;
     totalPrice: number;
     status: string;
     createdAt: string;

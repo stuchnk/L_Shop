@@ -1,8 +1,14 @@
 import { createElement } from '../../utils/createElement';
 import { fetchProduct } from '../../api/productApi';
-import { Product, CartItem } from '../../types/product';
+import { addToBasketApi } from '../../api/basketApi';
+import { Product } from '../../types/product';
 import { navigateTo } from '../../utils/router';
-import { isAuthenticated } from '../../utils/auth';
+import { clearSession, isAuthenticated } from '../../utils/auth';
+
+const formatRating = (rating: number): string => {
+  const rounded = Math.round(rating);
+  return `${'★'.repeat(rounded)}${'☆'.repeat(5 - rounded)} ${rating.toFixed(1)} / 5`;
+};
 
 export const renderProductDetail = async (productId: string): Promise<void> => {
   const app: HTMLElement | null = document.getElementById('app');
@@ -29,13 +35,13 @@ export const renderProductDetail = async (productId: string): Promise<void> => {
     });
 
     const detail: HTMLElement = createElement({
-      tag: 'div',
+      tag: 'section',
       className: 'detail',
       children: [
         createElement({
           tag: 'button',
           className: 'detail__back',
-          textContent: '← Назад к товарам',
+          textContent: 'Вернуться к каталогу',
           onClick: () => navigateTo('/'),
         }),
         createElement({
@@ -51,6 +57,15 @@ export const renderProductDetail = async (productId: string): Promise<void> => {
                   className: 'detail__img',
                   attributes: { src: product.image, alt: product.name },
                 }),
+                createElement({
+                  tag: 'span',
+                  className: `detail__stock ${
+                    product.available ? 'detail__stock--yes' : 'detail__stock--no'
+                  }`,
+                  textContent: product.available
+                    ? `В наличии · ${product.quantity} шт.`
+                    : 'Сейчас нет в наличии',
+                }),
               ],
             }),
             createElement({
@@ -59,7 +74,7 @@ export const renderProductDetail = async (productId: string): Promise<void> => {
               children: [
                 createElement({
                   tag: 'span',
-                  className: 'detail__category',
+                  className: 'detail__eyebrow',
                   textContent: product.category,
                 }),
                 createElement({
@@ -69,9 +84,15 @@ export const renderProductDetail = async (productId: string): Promise<void> => {
                   attributes: { 'data-title': product.name },
                 }),
                 createElement({
+                  tag: 'p',
+                  className: 'detail__lead',
+                  textContent:
+                    'Продуманная карточка товара с чистой подачей, мягкими акцентами и понятным сценарием покупки.',
+                }),
+                createElement({
                   tag: 'div',
                   className: 'detail__rating',
-                  textContent: `${'★'.repeat(Math.round(product.rating))}${'☆'.repeat(5 - Math.round(product.rating))} ${product.rating} / 5`,
+                  textContent: formatRating(product.rating),
                 }),
                 createElement({
                   tag: 'p',
@@ -80,20 +101,26 @@ export const renderProductDetail = async (productId: string): Promise<void> => {
                 }),
                 createElement({
                   tag: 'div',
-                  className: 'detail__price-row',
+                  className: 'detail__facts',
                   children: [
                     createElement({
-                      tag: 'span',
-                      className: 'detail__price',
-                      textContent: `${product.price.toFixed(2)} BYN`,
-                      attributes: { 'data-price': String(product.price) },
+                      tag: 'div',
+                      className: 'detail__fact',
+                      innerHTML: `<span>Цена</span><strong>${product.price.toFixed(
+                        2
+                      )} BYN</strong>`,
                     }),
                     createElement({
-                      tag: 'span',
-                      className: `detail__stock ${product.available ? 'detail__stock--yes' : 'detail__stock--no'}`,
-                      textContent: product.available
-                        ? `В наличии (${product.quantity} шт.)`
-                        : 'Нет в наличии',
+                      tag: 'div',
+                      className: 'detail__fact',
+                      innerHTML: `<span>Наличие</span><strong>${
+                        product.available ? 'Готов к покупке' : 'Под заказ'
+                      }</strong>`,
+                    }),
+                    createElement({
+                      tag: 'div',
+                      className: 'detail__fact',
+                      innerHTML: `<span>Доставка</span><strong>1–3 дня по городу</strong>`,
                     }),
                   ],
                 }),
@@ -111,7 +138,7 @@ export const renderProductDetail = async (productId: string): Promise<void> => {
                           textContent: '−',
                           onClick: () => {
                             if (qty > 1) {
-                              qty--;
+                              qty -= 1;
                               qtyDisplay.textContent = String(qty);
                             }
                           },
@@ -123,7 +150,7 @@ export const renderProductDetail = async (productId: string): Promise<void> => {
                           textContent: '+',
                           onClick: () => {
                             if (qty < product.quantity) {
-                              qty++;
+                              qty += 1;
                               qtyDisplay.textContent = String(qty);
                             }
                           },
@@ -132,36 +159,40 @@ export const renderProductDetail = async (productId: string): Promise<void> => {
                     }),
                     createElement({
                       tag: 'button',
-                      className: `detail__cart-btn ${!product.available ? 'detail__cart-btn--disabled' : ''}`,
-                      textContent: '🛒 Добавить в корзину',
-                      attributes: product.available ? {} : { disabled: 'true' },
-                      onClick: () => {
+                      className: `detail__cart-btn ${
+                        !product.available ? 'detail__cart-btn--disabled' : ''
+                      }`,
+                      textContent: product.available
+                        ? 'Добавить в корзину'
+                        : 'Недоступно',
+                      attributes: product.available ? { type: 'button' } : { disabled: 'true' },
+                      onClick: async () => {
                         if (!product.available) return;
 
                         if (!isAuthenticated()) {
-                          alert('Для добавления в корзину необходимо авторизоваться!');
+                          alert('Для добавления товара в корзину войдите в аккаунт.');
                           navigateTo('/login');
                           return;
                         }
 
-                        const raw: string | null = localStorage.getItem('cart');
-                        const cart: CartItem[] = raw ? JSON.parse(raw) : [];
-                        const idx: number = cart.findIndex((i: CartItem) => i.productId === product.id);
-
-                        if (idx >= 0) {
-                          cart[idx].quantity += qty;
-                        } else {
-                          cart.push({
+                        try {
+                          await addToBasketApi({
                             productId: product.id,
                             name: product.name,
                             price: product.price,
                             quantity: qty,
                             image: product.image,
                           });
-                        }
+                          navigateTo('/cart');
+                        } catch (error: unknown) {
+                          if (error instanceof Error && error.message === 'Unauthorized') {
+                            return;
+                          }
 
-                        localStorage.setItem('cart', JSON.stringify(cart));
-                        navigateTo('/cart');
+                          clearSession();
+                          alert('Сессия завершилась. Войдите снова.');
+                          navigateTo('/login');
+                        }
                       },
                     }),
                   ],
@@ -179,7 +210,7 @@ export const renderProductDetail = async (productId: string): Promise<void> => {
       createElement({
         tag: 'div',
         className: 'detail__error',
-        textContent: 'Товар не найден 😔',
+        textContent: 'Товар не найден. Вернитесь в каталог и выберите другую позицию.',
       })
     );
   }

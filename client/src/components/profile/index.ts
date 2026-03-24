@@ -1,5 +1,68 @@
-import { getDeliveryProfile, getUser, isAuthenticated, saveDeliveryProfile } from '../../utils/auth';
+import {
+  getDeliveryProfile,
+  getUser,
+  isAuthenticated,
+  saveDeliveryProfile,
+} from '../../utils/auth';
 import { navigateTo } from '../../utils/router';
+import { fetchDeliveries, DeliveryOrder } from '../../api/deliveryApi';
+
+const renderOrders = (orders: DeliveryOrder[]): void => {
+  const container = document.getElementById('orders-container');
+
+  if (!container) return;
+
+  if (!orders.length) {
+    container.innerHTML = `
+      <div class="profile-history__item">
+        <div>
+          <strong>История заказов пока пуста</strong>
+          <p>После оформления заказа здесь будут отображаться ваши покупки.</p>
+        </div>
+        <span class="profile-history__status">Нет заказов</span>
+      </div>
+    `;
+    return;
+  }
+
+  const sortedOrders: DeliveryOrder[] = [...orders].sort(
+    (a: DeliveryOrder, b: DeliveryOrder) =>
+      new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+  );
+
+  container.innerHTML = sortedOrders
+    .map((order: DeliveryOrder) => {
+      const createdAt: string = new Date(order.createdAt).toLocaleString();
+      const totalPrice: string = order.totalPrice.toFixed(2);
+      const itemsHtml: string = order.items
+        .map(
+          (item) => `
+            <li class="profile-history__line">
+              ${item.name} x ${item.quantity} - ${(
+                item.price * item.quantity
+              ).toFixed(2)} BYN
+            </li>
+          `
+        )
+        .join('');
+
+      return `
+        <div class="profile-history__item">
+          <div>
+            <strong>Заказ #${order.id}</strong>
+            <p>Дата: ${createdAt}</p>
+            <p>Сумма: ${totalPrice} BYN</p>
+            <p>Адрес: ${order.delivery.address}, ${order.delivery.city}</p>
+            <ul class="profile-history__list">
+              ${itemsHtml}
+            </ul>
+          </div>
+          <span class="profile-history__status">${order.status}</span>
+        </div>
+      `;
+    })
+    .join('');
+};
 
 export const createProfilePage = (): HTMLElement => {
   const page = document.createElement('main');
@@ -19,43 +82,7 @@ export const createProfilePage = (): HTMLElement => {
 
     return page;
   }
-  function renderOrders(orders: any[]) {
-    const container = document.getElementById('orders-container');
-  
-    if (!container) return;
-  
-    if (!orders.length) {
-      container.innerHTML = `
-        <div class="profile-history__item">
-          <div>
-            <strong>История заказов пока пуста</strong>
-            <p>После оформления заказа здесь будут отображаться покупки.</p>
-          </div>
-          <span class="profile-history__status">Нет заказов</span>
-        </div>
-      `;
-      return;
-    }
-  
-    container.innerHTML = orders.map(order => `
-      <div class="profile-history__item">
-        <div>
-          <strong>Заказ #${order.id}</strong>
-          <p>Дата: ${new Date(order.date).toLocaleString()}</p>
-          <p>Сумма: ${order.total} ₽</p>
-          <p>Адрес: ${order.address}</p>
-  
-          <ul>
-            ${order.items.map((item: any) => `
-              <li>Товар ID: ${item.productId} — ${item.quantity} шт.</li>
-            `).join('')}
-          </ul>
-        </div>
-  
-        <span class="profile-history__status">Оформлен</span>
-      </div>
-    `).join('');
-  }
+
   const user = getUser();
   const delivery = getDeliveryProfile();
 
@@ -97,15 +124,16 @@ export const createProfilePage = (): HTMLElement => {
 
       <div class="profile-card">
         <h2 class="profile-card__subtitle">История покупок</h2>
-       <div class="profile-history" id="orders-container">
-  <p>Загрузка заказов...</p>
-</div>
+        <div class="profile-history" id="orders-container">
+          <p>Загрузка заказов...</p>
+        </div>
       </div>
     </section>
   `;
 
   const form = page.querySelector('#delivery-form') as HTMLFormElement;
   const message = page.querySelector('#delivery-message') as HTMLParagraphElement;
+  const ordersContainer = page.querySelector('#orders-container') as HTMLElement;
 
   form.addEventListener('submit', (event) => {
     event.preventDefault();
@@ -121,21 +149,14 @@ export const createProfilePage = (): HTMLElement => {
 
     message.textContent = 'Данные для доставки сохранены';
   });
-  const ordersContainer = page.querySelector('#orders-container') as HTMLElement;
 
-const token = localStorage.getItem('token');
+  fetchDeliveries()
+    .then((orders: DeliveryOrder[]) => {
+      renderOrders(orders);
+    })
+    .catch(() => {
+      ordersContainer.innerHTML = '<p>Ошибка загрузки заказов</p>';
+    });
 
-fetch(`http://localhost:3000/api/orders/${user?.id}`, {
-  headers: {
-    Authorization: `Bearer ${token}`,
-  },
-})
-  .then(res => res.json())
-  .then(orders => {
-    renderOrders(orders);
-  })
-  .catch(() => {
-    ordersContainer.innerHTML = '<p>Ошибка загрузки заказов</p>';
-  });
   return page;
 };

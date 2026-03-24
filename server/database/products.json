@@ -5,7 +5,7 @@
     "description": "15.6 дюймов, Intel i5, 16GB RAM, 512GB SSD. Идеален для работы и учёбы.",
     "price": 2499.99,
     "category": "Электроника",
-    "image": "https://placehold.co/300x200/e2e8f0/1a1a2e?text=Laptop",
+    "image": "https://www.dateks.lv/images/pic/2400/2400/025/1766.jpg",
     "available": true,
     "quantity": 15,
     "rating": 4.5
@@ -16,7 +16,7 @@
     "description": "Беспроводные наушники с активным шумоподавлением и 30ч автономности.",
     "price": 349.99,
     "category": "Электроника",
-    "image": "https://placehold.co/300x200/e2e8f0/1a1a2e?text=Headphones",
+    "image": "https://sonycenter.md/wp-content/uploads/2022/05/wh1000xm5-multicolor.jpg",
     "available": true,
     "quantity": 30,
     "rating": 4.8
@@ -27,7 +27,7 @@
     "description": "Классические кроссовки для бега и повседневной носки.",
     "price": 129.99,
     "category": "Обувь",
-    "image": "https://placehold.co/300x200/e2e8f0/1a1a2e?text=Sneakers",
+    "image": "https://www.basketshop.ru/files/catalog/42524/CZ5594-001(3).JPG",
     "available": true,
     "quantity": 50,
     "rating": 4.3
@@ -38,7 +38,7 @@
     "description": "Роберт Мартин — классика по написанию чистого и поддерживаемого кода.",
     "price": 29.99,
     "category": "Книги",
-    "image": "https://placehold.co/300x200/e2e8f0/1a1a2e?text=Book",
+    "image": "https://m.media-amazon.com/images/I/71nj3JM-igL._AC_UF1000,1000_QL80_.jpg",
     "available": true,
     "quantity": 100,
     "rating": 4.9
@@ -49,7 +49,7 @@
     "description": "Флагман с AI-функциями, 6.2 дюймов, 256GB.",
     "price": 999.99,
     "category": "Электроника",
-    "image": "https://placehold.co/300x200/e2e8f0/1a1a2e?text=Phone",
+    "image": "https://images.samsung.com/is/image/samsung/p6pim/lv/2401/gallery/lv-galaxy-s24-sm-s921bzkdeue-539431246?imbypass=true",
     "available": false,
     "quantity": 0,
     "rating": 4.6
@@ -60,7 +60,7 @@
     "description": "Городской рюкзак с отделением для ноутбука до 15.6 дюймов.",
     "price": 49.99,
     "category": "Аксессуары",
-    "image": "https://placehold.co/300x200/e2e8f0/1a1a2e?text=Backpack",
+    "image": "https://shoc.by/files/product/28.11.2017/urbanlifestyle5.jpg",
     "available": true,
     "quantity": 25,
     "rating": 4.2
@@ -71,7 +71,7 @@
     "description": "Беспроводная клавиатура с подсветкой и мультидевайс подключением.",
     "price": 119.99,
     "category": "Электроника",
-    "image": "https://placehold.co/300x200/e2e8f0/1a1a2e?text=Keyboard",
+    "image": "https://artline.ua/storage/images/products/17115/gallery/258956/600_gallery_1716285166749615_0.webp",
     "available": true,
     "quantity": 20,
     "rating": 4.7
@@ -82,7 +82,7 @@
     "description": "Базовая хлопковая футболка премиум качества, белая.",
     "price": 19.99,
     "category": "Одежда",
-    "image": "https://placehold.co/300x200/e2e8f0/1a1a2e?text=T-Shirt",
+    "image": "https://a.lmcdn.ru/img600x866/R/T/RTLACG472901_18835006_1_v1_2x.jpg",
     "available": true,
     "quantity": 200,
     "rating": 4.0
@@ -93,7 +93,7 @@
     "description": "27 дюймов, 4K UHD, IPS, USB-C. Для профессиональной работы.",
     "price": 549.99,
     "category": "Электроника",
-    "image": "https://placehold.co/300x200/e2e8f0/1a1a2e?text=Monitor",
+    "image": "https://i.dell.com/is/image/DellContent/content/dam/ss2/product-images/dell-client-products/peripherals/monitors/u-series/u2724de/pdp/ultrasharp-u2724de-pdp-hero.psd?qlt=95&fit=constrain,1&hei=350&wid=504&fmt=png-alpha",
     "available": true,
     "quantity": 10,
     "rating": 4.6
@@ -104,7 +104,7 @@
     "description": "Автоматическая кофемашина с капучинатором.",
     "price": 399.99,
     "category": "Бытовая техника",
-    "image": "https://placehold.co/300x200/e2e8f0/1a1a2e?text=Coffee",
+    "image": "https://www.euronics.lv/UserFiles/Products/Images/434374-654825.avif",
     "available": true,
     "quantity": 8,
     "rating": 4.4
