@@ -14,4 +14,4 @@ exports.DELIVERY_FILE = path_1.default.join(exports.DATABASE_PATH, 'delivery.jso
 // ✅ ДОБАВЬ ЭТО
 exports.ORDERS_FILE = path_1.default.join(exports.DATABASE_PATH, 'orders.json');
 exports.COOKIE_NAME = 'session_token';
-exports.COOKIE_MAX_AGE = 10 * 60 * 1000;
+exports.COOKIE_MAX_AGE = 7 * 24 * 60 * 60 * 1000;

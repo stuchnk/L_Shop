@@ -13,4 +13,4 @@ export const DELIVERY_FILE: string = path.join(DATABASE_PATH, 'delivery.json');
 export const ORDERS_FILE: string = path.join(DATABASE_PATH, 'orders.json');
 
 export const COOKIE_NAME: string = 'session_token';
-export const COOKIE_MAX_AGE: number = 10 * 60 * 1000;
+export const COOKIE_MAX_AGE: number = 7 * 24 * 60 * 60 * 1000;
