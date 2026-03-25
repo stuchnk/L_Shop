@@ -1,6 +1,7 @@
 import { createElement } from '../../utils/createElement';
 import { navigateTo } from '../../utils/router';
 import { clearSession, getUser, isAuthenticated } from '../../utils/auth';
+import { getTheme, toggleTheme } from '../../utils/theme';
 
 const getInitials = (name: string): string => {
   return name
@@ -27,10 +28,36 @@ const createNavLink = (text: string, path: string): HTMLElement => {
 export const renderHeader = (): HTMLElement => {
   const user = getUser();
   const auth = isAuthenticated();
+  const theme = getTheme();
 
   const navChildren: HTMLElement[] = [
     createNavLink('Каталог', '/'),
     createNavLink('Корзина', '/cart'),
+    createElement({
+      tag: 'button',
+      className: 'header__theme-toggle',
+      attributes: {
+        type: 'button',
+        'aria-label':
+          theme === 'dark'
+            ? 'Переключить на светлую тему'
+            : 'Переключить на тёмную тему',
+        title:
+          theme === 'dark'
+            ? 'Переключить на светлую тему'
+            : 'Переключить на тёмную тему',
+      },
+      onClick: () => {
+        toggleTheme();
+      },
+      children: [
+        createElement({
+          tag: 'span',
+          className: 'header__theme-icon',
+          textContent: theme === 'dark' ? '☀' : '☾',
+        }),
+      ],
+    }),
   ];
 
   if (auth && user) {
@@ -108,12 +135,12 @@ export const renderHeader = (): HTMLElement => {
                   createElement({
                     tag: 'span',
                     className: 'header__logo-title',
-                    textContent: 'L_Shop Atelier',
+                    textContent: 'L_Shop',
                   }),
                   createElement({
                     tag: 'span',
                     className: 'header__logo-subtitle',
-                    textContent: 'curated objects for everyday life',
+                    textContent: 'Стильные покупки каждый день',
                   }),
                 ],
               }),

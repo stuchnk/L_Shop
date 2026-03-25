@@ -6,6 +6,7 @@ type Product = {
   id: number;
   quantity: number;
   available: boolean;
+  image?: string;
 };
 
 const readBaskets = (): UserBasket[] => {
@@ -35,8 +36,21 @@ const readProducts = (): Product[] => {
 export const basketService = {
   getByUserId(userId: number): BasketItem[] {
     const baskets = readBaskets();
+    const products = readProducts();
     const userBasket = baskets.find(b => b.userId === userId);
-    return userBasket ? userBasket.items : [];
+
+    if (!userBasket) {
+      return [];
+    }
+
+    return userBasket.items.map((item: BasketItem) => {
+      const product = products.find(p => p.id === item.productId);
+
+      return {
+        ...item,
+        image: item.image || product?.image || '',
+      };
+    });
   },
 
   addItem(userId: number, item: BasketItem): BasketItem[] {
@@ -68,6 +82,7 @@ export const basketService = {
 
     if (existingItem) {
       existingItem.quantity = newQty;
+      existingItem.image = item.image || existingItem.image;
     } else {
       userBasket.items.push(item);
     }

@@ -141,7 +141,7 @@ export const renderHomePage = async (): Promise<void> => {
                   <div class="home__hero-card-media">
                     <img
                       class="home__hero-card-image"
-                      src="https://i.pinimg.com/736x/f8/96/28/f896285292debd897fd63894e060d6bf.jpg"
+                      src="https://i.pinimg.com/736x/d4/a4/7b/d4a47b3992b000ccc3f753d137893ec6.jpg"
                       alt="Focus visual"
                     />
                   </div>

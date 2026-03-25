@@ -32,8 +32,18 @@ const readProducts = () => {
 exports.basketService = {
     getByUserId(userId) {
         const baskets = readBaskets();
+        const products = readProducts();
         const userBasket = baskets.find(b => b.userId === userId);
-        return userBasket ? userBasket.items : [];
+        if (!userBasket) {
+            return [];
+        }
+        return userBasket.items.map((item) => {
+            const product = products.find(p => p.id === item.productId);
+            return {
+                ...item,
+                image: item.image || product?.image || '',
+            };
+        });
     },
     addItem(userId, item) {
         const baskets = readBaskets();
@@ -57,6 +67,7 @@ exports.basketService = {
         }
         if (existingItem) {
             existingItem.quantity = newQty;
+            existingItem.image = item.image || existingItem.image;
         }
         else {
             userBasket.items.push(item);

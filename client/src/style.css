@@ -25,6 +25,27 @@
   --radius-sm: 14px;
 }
 
+:root[data-theme='dark'] {
+  --bg: #0f141a;
+  --bg-deep: #0a0e12;
+  --surface: rgba(18, 24, 31, 0.82);
+  --surface-strong: rgba(22, 28, 36, 0.94);
+  --surface-soft: rgba(17, 22, 28, 0.78);
+  --ink: #f5efe7;
+  --ink-soft: #c7beb2;
+  --ink-muted: #9e9385;
+  --line: rgba(246, 239, 231, 0.08);
+  --line-strong: rgba(246, 239, 231, 0.16);
+  --accent: #d2a36a;
+  --accent-deep: #a77743;
+  --accent-soft: rgba(210, 163, 106, 0.18);
+  --success: #79d3a4;
+  --danger: #ff8b84;
+  --shadow-lg: 0 28px 80px rgba(0, 0, 0, 0.38);
+  --shadow-md: 0 18px 44px rgba(0, 0, 0, 0.28);
+  --shadow-sm: 0 12px 26px rgba(0, 0, 0, 0.22);
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -44,6 +65,14 @@ body {
   color: var(--ink);
   min-height: 100vh;
   overflow-x: hidden;
+  transition: background 0.35s ease, color 0.35s ease;
+}
+
+:root[data-theme='dark'] body {
+  background:
+    radial-gradient(circle at top left, rgba(47, 60, 74, 0.38), transparent 28%),
+    radial-gradient(circle at right 18%, rgba(175, 118, 60, 0.14), transparent 24%),
+    linear-gradient(180deg, #0f141a 0%, #0b1015 54%, #090d12 100%);
 }
 
 body::before,
@@ -66,6 +95,14 @@ body::before {
   animation: floatGlow 16s ease-in-out infinite;
 }
 
+:root[data-theme='dark'] body::before {
+  background: radial-gradient(circle, rgba(110, 82, 51, 0.38), transparent 68%);
+}
+
+:root[data-theme='dark'] body::after {
+  background: radial-gradient(circle, rgba(60, 78, 96, 0.34), transparent 68%);
+}
+
 body::after {
   left: -120px;
   bottom: 80px;
@@ -81,6 +118,12 @@ input,
 select,
 textarea {
   font: inherit;
+  transition:
+    background-color 0.25s ease,
+    border-color 0.25s ease,
+    color 0.25s ease,
+    box-shadow 0.25s ease,
+    transform 0.25s ease;
 }
 
 button {
@@ -90,6 +133,10 @@ button {
 img {
   display: block;
   max-width: 100%;
+}
+
+::placeholder {
+  color: var(--ink-muted);
 }
 
 #app {
@@ -115,6 +162,11 @@ img {
   border: 1px solid var(--line);
   box-shadow: var(--shadow-lg);
   backdrop-filter: blur(16px);
+}
+
+:root[data-theme='dark'] .page-stub {
+  background: linear-gradient(180deg, rgba(20, 27, 34, 0.88), rgba(15, 20, 26, 0.82));
+  border-color: rgba(246, 239, 231, 0.08);
 }
 
 .page-stub h2 {
@@ -175,6 +227,11 @@ img {
   animation: riseIn 0.6s ease both;
 }
 
+:root[data-theme='dark'] .auth-card {
+  background: linear-gradient(180deg, rgba(20, 26, 34, 0.94), rgba(14, 19, 26, 0.9));
+  border-color: rgba(246, 239, 231, 0.08);
+}
+
 .auth-page {
   min-height: calc(100vh - 120px);
   display: grid;
@@ -202,6 +259,12 @@ img {
     radial-gradient(circle at top right, rgba(234, 217, 193, 0.6), transparent 28%),
     linear-gradient(180deg, rgba(255, 255, 255, 0.45), transparent 35%);
   pointer-events: none;
+}
+
+:root[data-theme='dark'] .auth-card::before {
+  background:
+    radial-gradient(circle at top right, rgba(210, 163, 106, 0.18), transparent 28%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.04), transparent 35%);
 }
 
 .auth-card > * {
@@ -265,6 +328,14 @@ img {
   font-size: 15px;
   outline: none;
   transition: border-color 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease;
+}
+
+:root[data-theme='dark'] .auth-form__input,
+:root[data-theme='dark'] .profile-form__input,
+:root[data-theme='dark'] .profile-form__textarea {
+  background: rgba(12, 17, 23, 0.82);
+  border-color: rgba(246, 239, 231, 0.08);
+  color: var(--ink);
 }
 
 .auth-form__input:focus,
@@ -342,6 +413,11 @@ img {
   backdrop-filter: blur(16px);
 }
 
+:root[data-theme='dark'] .profile-card {
+  background: linear-gradient(180deg, rgba(20, 26, 34, 0.9), rgba(15, 20, 27, 0.82));
+  border-color: rgba(246, 239, 231, 0.08);
+}
+
 .profile-card__head {
   display: flex;
   align-items: center;
@@ -392,6 +468,11 @@ img {
   border: 1px solid rgba(52, 40, 26, 0.08);
 }
 
+:root[data-theme='dark'] .profile-card__info-item {
+  background: rgba(12, 17, 23, 0.72);
+  border-color: rgba(246, 239, 231, 0.06);
+}
+
 .profile-card__label {
   display: block;
   margin-bottom: 8px;
@@ -426,6 +507,11 @@ img {
   border-radius: 24px;
   background: rgba(255, 255, 255, 0.68);
   border: 1px solid rgba(52, 40, 26, 0.08);
+}
+
+:root[data-theme='dark'] .profile-history__item {
+  background: rgba(12, 17, 23, 0.72);
+  border-color: rgba(246, 239, 231, 0.06);
 }
 
 .profile-history__item p {

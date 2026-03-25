@@ -137,6 +137,22 @@
   line-height: 1.7;
 }
 
+:root[data-theme='dark'] .delivery-form {
+  background: linear-gradient(180deg, rgba(20, 26, 34, 0.9), rgba(14, 19, 26, 0.82));
+  border-color: rgba(246, 239, 231, 0.08);
+}
+
+:root[data-theme='dark'] .delivery-form fieldset {
+  background: rgba(255, 255, 255, 0.04);
+  border-color: rgba(246, 239, 231, 0.08);
+}
+
+:root[data-theme='dark'] .delivery-form input,
+:root[data-theme='dark'] .delivery-form textarea {
+  background: rgba(10, 15, 20, 0.84);
+  border-color: rgba(246, 239, 231, 0.08);
+}
+
 @media (max-width: 640px) {
   .delivery-page {
     width: min(100%, calc(100% - 20px));

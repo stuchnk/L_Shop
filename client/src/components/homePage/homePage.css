@@ -251,6 +251,36 @@
   color: var(--danger);
 }
 
+:root[data-theme='dark'] .home__hero-copy,
+:root[data-theme='dark'] .home__hero-card,
+:root[data-theme='dark'] .home__title-row,
+:root[data-theme='dark'] .products__empty,
+:root[data-theme='dark'] .products__error {
+  background: linear-gradient(180deg, rgba(20, 26, 34, 0.9), rgba(14, 19, 26, 0.82));
+  border-color: rgba(246, 239, 231, 0.08);
+}
+
+:root[data-theme='dark'] .home__hero-card::before {
+  background: radial-gradient(circle, rgba(210, 163, 106, 0.14), transparent 68%);
+}
+
+:root[data-theme='dark'] .home__hero-tag,
+:root[data-theme='dark'] .products__empty-mark,
+:root[data-theme='dark'] .home__count-card {
+  background: rgba(210, 163, 106, 0.12);
+}
+
+:root[data-theme='dark'] .home__hero-card-media {
+  background: linear-gradient(180deg, rgba(29, 37, 45, 0.94), rgba(21, 27, 34, 0.82));
+  box-shadow: inset 0 0 0 1px rgba(246, 239, 231, 0.06);
+}
+
+:root[data-theme='dark'] .home__hero-card--accent {
+  background:
+    linear-gradient(140deg, rgba(119, 84, 50, 0.94), rgba(52, 38, 24, 0.92)),
+    rgba(20, 26, 34, 0.9);
+}
+
 @media (max-width: 1024px) {
   .home__hero,
   .home__collection {

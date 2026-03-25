@@ -15,10 +15,13 @@ import { createProfilePage } from './components/profile/index';
 import { renderCartPage } from './components/cart/cart';
 import { renderDeliveryPage } from './components/delivery/delivery';
 import { addRoute, initRouter } from './utils/router';
+import { initTheme } from './utils/theme';
 
 const app: HTMLElement | null = document.getElementById('app');
 
 if (app) {
+  initTheme();
+
   const rerenderHeader = (): void => {
     const oldHeader: Element | null = app.querySelector('.header');
     if (oldHeader) {
@@ -67,6 +70,10 @@ if (app) {
   });
 
   window.addEventListener('auth:changed', () => {
+    rerenderHeader();
+  });
+
+  window.addEventListener('theme:changed', () => {
     rerenderHeader();
   });
 

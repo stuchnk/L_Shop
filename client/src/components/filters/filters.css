@@ -92,3 +92,18 @@
   background: rgba(155, 123, 86, 0.16);
   transform: translateY(-1px);
 }
+
+:root[data-theme='dark'] .filters {
+  background: linear-gradient(180deg, rgba(20, 26, 34, 0.9), rgba(14, 19, 26, 0.82));
+  border-color: rgba(246, 239, 231, 0.08);
+}
+
+:root[data-theme='dark'] .filters__input,
+:root[data-theme='dark'] .filters__select {
+  background: rgba(10, 15, 20, 0.84);
+  border-color: rgba(246, 239, 231, 0.08);
+}
+
+:root[data-theme='dark'] .filters__reset {
+  background: rgba(255, 255, 255, 0.05);
+}

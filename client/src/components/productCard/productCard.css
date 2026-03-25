@@ -206,3 +206,21 @@
   color: var(--ink-muted);
   box-shadow: none;
 }
+
+:root[data-theme='dark'] .card {
+  background: linear-gradient(180deg, rgba(20, 26, 34, 0.92), rgba(14, 19, 26, 0.84));
+  border-color: rgba(246, 239, 231, 0.08);
+}
+
+:root[data-theme='dark'] .card__img {
+  background: linear-gradient(180deg, #1c2530, #131a22);
+}
+
+:root[data-theme='dark'] .card__qty {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+:root[data-theme='dark'] .card__qty-btn {
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--ink);
+}

@@ -5,6 +5,14 @@
   },
   {
     "userId": 1774290243849,
-    "items": []
+    "items": [
+      {
+        "productId": 1,
+        "name": "Ноутбук ASUS VivoBook 15",
+        "price": 2499.99,
+        "quantity": 1,
+        "image": "https://www.dateks.lv/images/pic/2400/2400/025/1766.jpg"
+      }
+    ]
   }
 ]
